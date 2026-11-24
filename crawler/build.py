@@ -27,7 +27,7 @@ def chips(t):
     if t["artifacts"] and t["release_digests"]: out.append(("Release files match GitHub's hashes", "good"))
     elif t["artifacts"]: out.append(("Release files without hashes", "warn"))
     else: out.append(("Source only", "plain"))
-    if t.get("mine"): out.append(("Experimental, made by the site owner", "mine"))
+    if t.get("mine"): out.append(("Synthetic test files only", "warn"))
     return "".join(f'<span class="chip {k}">{E(x)}</span>' for x, k in out)
 
 CSS = """
@@ -82,7 +82,7 @@ def page(title, desc, body, path, depth=0):
 <header class="top"><div class="wrap"><a class="brand" href="{r}index.html">GTA 6 <b>Tools</b></a>
 <nav><a href="{r}index.html">Tools</a><a href="{r}method.html">How we check</a><a href="{r}avoid.html">Avoid</a></nav></div></header>
 <main class="wrap">{body}</main>
-<footer><div class="wrap"><p>An independent list by William Baptist (<a href="https://github.com/BaptistSec">BaptistSec</a>). Two of the listed tools are mine and are marked. Data crawled {E(D['crawled_at'])}. Contact: {CONTACT}</p>
+<footer><div class="wrap"><p>An independent list. Data crawled {E(D['crawled_at'])}. Contact: {CONTACT}</p>
 <p>Not affiliated with Rockstar Games or Take-Two Interactive. This site does not host or link to game files, executables, keys or ways around access controls.</p></div></footer></body></html>"""
 
 def stages(t):
@@ -105,12 +105,9 @@ def index():
         if not ts: continue
         secs += f'<h2>{E(c["title"])}</h2><div class="grid">{"".join(tool_block(t) for t in ts)}</div>'
     body = f"""<h1>GTA 6 tools, with the evidence</h1>
-<p class="sub">A short list of GTA VI tools, one sentence on what each does, and what we could check about it. Kept small on purpose.</p>
-<div class="box"><p><b>Read this first.</b> We have not checked any of these against genuine GTA VI files. What a tool can do is what its author says. We inspect the source and release files, and that is all we claim. <a href="method.html">How we check</a></p></div>
+<p class="sub">What each GTA VI tool does, what it does not do, and what has been checked.</p>
 {secs}
-<h2>Why this exists</h2>
-<div class="box"><p>I'm William. I wrote the .ttpf spec and toolkit listed here, so those two are marked as mine. I have not tested the other tools on this list myself. For each one this site shows what can be checked from its public source and release files, and says what has not been checked. The crawler and its rules are in the <a href="https://github.com/BaptistSec/gta6-tools">repo</a>.</p>
-<p>Something wrong or missing? Open an issue on the repo or email {CONTACT}.</p></div>"""
+"""
     return page("GTA 6 tools, with the evidence", "A short, independent list of GTA VI tools with what each does and what could be checked: licence, history, release hashes and what has and has not been tested.", body, "")
 
 def tool_page(t):
@@ -126,9 +123,9 @@ def tool_page(t):
             arts += f'<tr><td>{E(a["name"])}</td><td class="n">{a["size"]/1e6:.1f} MB</td><td colspan="2" class="muted">{E(a.get("status","not fetched"))}</td></tr>'
     if arts:
         arts = f'<h2>Release files</h2><table><thead><tr><th>File</th><th>Size</th><th>SHA-256</th><th>Contents</th></tr></thead><tbody>{arts}</tbody></table><p class="muted">Downloaded, hashed and listed, never run. A match means the file is what the author uploaded, not that it is safe. Latest release {E(str(t["latest_release"]))}, {E(str(t["latest_release_date"]))}.</p>'
-    mine = '<div class="box"><p><span class="chip mine">Experimental, made by the site owner</span> I wrote this one. It has only been tested on synthetic files, so do not assume it works on a genuine file.</p></div>' if t.get("mine") else ""
-    lim = f'<div class="box"><h3>Limits</h3><p>{E(t["limits"])}</p></div>' if t.get("limits") else ""
-    hist = f'Created {t["created"]}, last changed {t["pushed"]}. {t["commits"]} commits, {t["contributors"]} contributor{"s" if t["contributors"]!=1 else ""}. Author account since {t["owner_created"]} with {t["owner_repos"]} public repositories. {t["stars"]} stars, {t["open_issues"]} open issues and pull requests.'
+    mine = ""
+    lim = f'<div class="box"><h3>What it does not do</h3><p>{E(t["limits"])}</p></div>' if t.get("limits") else ""
+    hist = f'Created {t["created"]}, last changed {t["pushed"]}. {t["commits"]} commits, {t["contributors"]} contributor{"s" if t["contributors"]!=1 else ""}. Author {t["owner"]}, account since {t["owner_created"]} with {t["owner_repos"]} public repositories. {t["stars"]} stars, {t["open_issues"]} open issues and pull requests.'
     body = f"""<p class="crumb"><a href="../index.html">All tools</a> / {E(c['title'])}</p>
 <h1>{E(t['name'])}</h1><p class="sub">{E(t['line'])}</p>
 <div class="chips">{chips(t)}</div>
