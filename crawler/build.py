@@ -101,9 +101,9 @@ def page(title, desc, body, path, depth=0):
 def stages(t):
     m = t.get("mine"); ts = t.get("tested", {})
     rows = [
-     ("Source inspected", "Yes", "We read the README and repository details and hashed the release files on " + D["crawled_at"][:10] + ".", "good"),
-     ("Tested on synthetic files", ts.get("synthetic", "Yes, by us.") if m else "Not by us", "" if m else "The author may have tests; we have not run them.", "good" if m else "no"),
-     ("Tested on native Windows", ts.get("windows", "Not run.") if m else "Not by us", "", "good" if m and ts.get("windows", "").startswith("Windows") else "no"),
+     ("Source inspected", "Yes", "We read the README, " + ("the licence files, " if t.get("license_override") else "") + "and the repository details on " + D["crawled_at"][:10] + ("." if t.get("releases") == 0 else ", and hashed the release files."), "good"),
+     ("Tested on synthetic files", ts.get("synthetic", "Yes, by us.") if (m or ts.get("synthetic")) else "Not by us", "" if (m or ts.get("synthetic")) else "The author may have tests; we have not run them.", "good" if (m or ts.get("synthetic")) else "no"),
+     ("Tested on native Windows", ts.get("windows", "Not run.") if (m or ts.get("windows")) else "Not by us", "", "good" if ts.get("windows", "").startswith("Windows") else "no"),
      ("Checked against genuine retail files", "No", "We have not done this for any tool on this site, including our own.", "no")]
     return "".join(f'<tr><td>{E(a)}</td><td class="{k}">{E(b)}</td><td class="muted">{E(c)}</td></tr>' for a, b, c, k in rows)
 
@@ -144,7 +144,7 @@ def tool_page(t):
 <div class="chips">{chips(t)}</div>
 <p><a class="btn" href="{E(t['url'])}">Source on GitHub</a></p>
 {mine}
-<h2>What the author says it does</h2><div class="box"><p>{E(t['works'])}</p><p class="muted">{E(t['kind'])}. {E(t['platforms'])}. Not something we tested.</p></div>
+<h2>What the author says it does</h2><div class="box"><p>{E(t['works'])}</p><p class="muted">{E(t['kind'])}. {E(t['platforms'])}.{'' if t.get('tested') else ' Not something we tested.'}</p></div>
 {lim}
 <h2>What has been checked</h2><table><tbody>{stages(t)}</tbody></table>
 <h2>History</h2><p>{E(hist)}</p>
@@ -156,7 +156,7 @@ def method():
     body = f"""<h1>How we check</h1><p class="sub">Each tool gets a row of evidence, not a score. The four things we separate are easy to mix up, so we keep them apart.</p>
 <h2>Four different things</h2><table><tbody>
 <tr><td><b>Source inspected</b></td><td>We read the README and repository details and hash the release files. Anyone can do this and it says little about whether the tool works.</td></tr>
-<tr><td><b>Synthetic-file testing</b></td><td>Tests that run on files made to look like the real format. They catch bugs. They do not show a tool copes with a genuine file.</td></tr>
+<tr><td><b>Synthetic-file testing</b></td><td>Tests that run on files made to look like the real format. They catch bugs. They do not show a tool copes with a genuine file. For tools we did not write, this row is filled only when we ran the author's own tests ourselves, and it names the commit.</td></tr>
 <tr><td><b>Native Windows testing</b></td><td>A run on a real Windows machine. Wine runs and Linux runs do not count.</td></tr>
 <tr><td><b>Genuine retail-file validation</b></td><td>Checking against files from a retail copy. We have not done this for anything here, so every tool shows "No".</td></tr></tbody></table>
 <h2>Who gets listed</h2><div class="box"><p>There is no formula. Each tool is chosen by hand, looking at its licence, who is behind it, the quality of its source, what it actually does, which inputs it supports, what evidence exists and what its limits are. A project is not left out for being new. It is left out if we cannot say these things about it honestly. Our own two tools are listed, marked as experimental, with what has and has not been tested.</p></div>

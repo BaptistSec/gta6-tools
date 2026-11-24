@@ -9,6 +9,11 @@
    "id": "textures",
    "title": "Work with .ttpf texture packs",
    "ask": "View, swap or read up on .ttpf textures"
+  },
+  {
+   "id": "scripts",
+   "title": "Read script and animation archives",
+   "ask": "Decode script data and animation clips from your own copy"
   }
  ],
  "tools": [
@@ -87,6 +92,22 @@
    "works": "Author lists BC1 to BC7, HDR and uncompressed formats, with layout read from the file header.",
    "limits": "Cannot decode textures stored only as BCPack.",
    "listed": true
+  },
+  {
+   "repo": "Ahmet-Dedeler/rage9-re",
+   "name": "rage9-re",
+   "cat": "scripts",
+   "platforms": "Rust and Python 3, from source",
+   "kind": "Command line and library",
+   "line": "Reads script.rpf and anim.rpf, writes script data as XML or JSON and animation clips as glTF.",
+   "works": "Author lists script containers (PSIN) parsing for all 1,012 files in script.rpf, and animation channels decoding to .glb clips. The repository contains no game data; you supply your own files.",
+   "limits": "Only a few named bones are mapped in the glTF export, so the full skeleton is not rebuilt. About 1% of animation steps jump by more than 20 degrees. Most field names in script data are unresolved hashes. No releases; you build it yourself.",
+   "tested": {
+    "synthetic": "Ran the author's Python test suite (7 tests, synthetic data) on Linux, Python 3.10.12, at commit 30c6d21 on 24 Nov 2026: 7 passed. The Rust tests were not run.",
+    "windows": "Not run."
+   },
+   "listed": true,
+   "license_override": "MIT OR Apache-2.0"
   }
  ],
  "avoid": [

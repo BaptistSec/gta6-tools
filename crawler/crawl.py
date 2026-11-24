@@ -114,6 +114,7 @@ def main():
             "artifacts": arts, "states_limits": bool(LIMITS.search(readme)), "no_game_files": bool(NO_GAME.search(readme)),
             "url": r["html_url"], "default_branch": r["default_branch"],
         }
+        if t.get("license_override"): f["license"] = t["license_override"]
         f["listed"] = bool(t.get("listed"))
         rec.update(f)
         out["tools"].append(rec)
