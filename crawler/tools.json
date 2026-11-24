@@ -20,7 +20,8 @@
    "kind": "Command line and desktop app",
    "line": "Pulls models, textures, audio, text and map data out of your own GTA VI install into glTF, PNG and WAV.",
    "works": "Author lists textures, models, map placements, collision, audio and text as working; file names are recovered from inside resources because the archive index is encrypted and not read.",
-   "limits": "Some compressed textures use fitted tables, so a few blocks can be slightly off. Materials are partial."
+   "limits": "Some compressed textures use fitted tables, so a few blocks can be slightly off. Materials are partial.",
+   "listed": true
   },
   {
    "repo": "HolyRoses/gta6-explorer",
@@ -30,7 +31,8 @@
    "kind": "Command line",
    "line": "A read-only Python toolkit that lists and exports textures, audio, video and metadata from a GTA VI package, with nothing to install.",
    "works": "Author lists texture, audio, video, metadata and shader inspection as supported.",
-   "limits": "Model and world export needs the SixNG backend."
+   "limits": "Model and world export needs the SixNG backend.",
+   "listed": true
   },
   {
    "repo": "Albotterin/AWC_from_RPF9_Extractor",
@@ -40,7 +42,8 @@
    "kind": "Small tool",
    "line": "Extracts the music streams out of RPF9 files.",
    "works": "Does one job, audio streams.",
-   "limits": "Audio only."
+   "limits": "Audio only.",
+   "listed": true
   },
   {
    "repo": "BaptistSec/ttpf-kit",
@@ -55,7 +58,8 @@
    "tested": {
     "synthetic": "20 tests on synthetic files, including malformed input and failed writes.",
     "windows": "Windows 10 (build 19045), Python 3.10.11, all 20 passed, 24 Nov 2026."
-   }
+   },
+   "listed": true
   },
   {
    "repo": "BaptistSec/ttpf-spec",
@@ -70,7 +74,8 @@
    "tested": {
     "synthetic": "The reference reader passes a self-test on synthetic files. The Kaitai definition has not been compiled.",
     "windows": "Not run."
-   }
+   },
+   "listed": true
   },
   {
    "repo": "paryzius/ttpf-viewer",
@@ -80,7 +85,8 @@
    "kind": "Desktop app",
    "line": "Browses thousands of textures in .ttpf files at once and saves them as PNG or DDS, with cube maps and texture arrays.",
    "works": "Author lists BC1 to BC7, HDR and uncompressed formats, with layout read from the file header.",
-   "limits": "Cannot decode textures stored only as BCPack."
+   "limits": "Cannot decode textures stored only as BCPack.",
+   "listed": true
   }
  ],
  "avoid": [

@@ -1,5 +1,5 @@
 {
- "crawled_at": "2026-11-24 11:15 UTC",
+ "crawled_at": "2026-11-24 11:20 UTC",
  "categories": [
   {
    "id": "extract",
@@ -22,16 +22,17 @@
    "line": "Pulls models, textures, audio, text and map data out of your own GTA VI install into glTF, PNG and WAV.",
    "works": "Author lists textures, models, map placements, collision, audio and text as working; file names are recovered from inside resources because the archive index is encrypted and not read.",
    "limits": "Some compressed textures use fitted tables, so a few blocks can be slightly off. Materials are partial.",
+   "listed": true,
    "license": "GPL-3.0",
    "stars": 89,
    "created": "2026-11-21",
    "pushed": "2026-11-24",
-   "pushed_days": 0.040772502569444445,
+   "pushed_days": 0.04389725946759259,
    "commits": 216,
    "contributors": 8,
    "owner": "holdmysocks",
    "owner_created": "2012-01-18",
-   "owner_age_days": 5423.547983150717,
+   "owner_age_days": 5423.551107907616,
    "owner_repos": 18,
    "open_issues": 3,
    "archived": false,
@@ -71,9 +72,7 @@
    "states_limits": true,
    "no_game_files": true,
    "url": "https://github.com/holdmysocks/SixNG",
-   "default_branch": "master",
-   "listed": true,
-   "not_listed_because": []
+   "default_branch": "master"
   },
   {
    "repo": "HolyRoses/gta6-explorer",
@@ -84,16 +83,17 @@
    "line": "A read-only Python toolkit that lists and exports textures, audio, video and metadata from a GTA VI package, with nothing to install.",
    "works": "Author lists texture, audio, video, metadata and shader inspection as supported.",
    "limits": "Model and world export needs the SixNG backend.",
+   "listed": true,
    "license": "MIT",
    "stars": 9,
    "created": "2026-11-21",
    "pushed": "2026-11-24",
-   "pushed_days": 0.20652481738425926,
+   "pushed_days": 0.2096495742824074,
    "commits": 17,
    "contributors": 1,
    "owner": "HolyRoses",
    "owner_created": "2011-02-08",
-   "owner_age_days": 5767.858446113681,
+   "owner_age_days": 5767.861570870579,
    "owner_repos": 15,
    "open_issues": 0,
    "archived": false,
@@ -105,9 +105,7 @@
    "states_limits": true,
    "no_game_files": true,
    "url": "https://github.com/HolyRoses/gta6-explorer",
-   "default_branch": "main",
-   "listed": true,
-   "not_listed_because": []
+   "default_branch": "main"
   },
   {
    "repo": "Albotterin/AWC_from_RPF9_Extractor",
@@ -118,16 +116,17 @@
    "line": "Extracts the music streams out of RPF9 files.",
    "works": "Does one job, audio streams.",
    "limits": "Audio only.",
+   "listed": true,
    "license": "MIT",
    "stars": 4,
    "created": "2026-11-22",
    "pushed": "2026-11-24",
-   "pushed_days": 0.06105028034722223,
+   "pushed_days": 0.06417503724537037,
    "commits": 26,
    "contributors": 1,
    "owner": "Albotterin",
    "owner_created": "2014-11-11",
-   "owner_age_days": 4395.922531761828,
+   "owner_age_days": 4395.925656518727,
    "owner_repos": 3,
    "open_issues": 0,
    "archived": false,
@@ -160,9 +159,7 @@
    "states_limits": true,
    "no_game_files": true,
    "url": "https://github.com/Albotterin/AWC_from_RPF9_Extractor",
-   "default_branch": "main",
-   "listed": true,
-   "not_listed_because": []
+   "default_branch": "main"
   },
   {
    "repo": "BaptistSec/ttpf-kit",
@@ -178,16 +175,17 @@
     "synthetic": "20 tests on synthetic files, including malformed input and failed writes.",
     "windows": "Windows 10 (build 19045), Python 3.10.11, all 20 passed, 24 Nov 2026."
    },
+   "listed": true,
    "license": "MIT",
    "stars": 0,
    "created": "2026-11-24",
    "pushed": "2026-11-24",
-   "pushed_days": 0.011061854421296296,
-   "commits": 12,
+   "pushed_days": 0.002705129837962963,
+   "commits": 13,
    "contributors": 0,
    "owner": "BaptistSec",
    "owner_created": "2021-11-17",
-   "owner_age_days": 1832.7074970396063,
+   "owner_age_days": 1832.7106217965045,
    "owner_repos": 25,
    "open_issues": 0,
    "archived": false,
@@ -199,9 +197,7 @@
    "states_limits": false,
    "no_game_files": true,
    "url": "https://github.com/BaptistSec/ttpf-kit",
-   "default_branch": "main",
-   "listed": true,
-   "not_listed_because": []
+   "default_branch": "main"
   },
   {
    "repo": "BaptistSec/ttpf-spec",
@@ -217,16 +213,17 @@
     "synthetic": "The reference reader passes a self-test on synthetic files. The Kaitai definition has not been compiled.",
     "windows": "Not run."
    },
+   "listed": true,
    "license": "MIT",
    "stars": 0,
    "created": "2026-11-24",
    "pushed": "2026-11-24",
-   "pushed_days": 0.011258613680555555,
+   "pushed_days": 0.014383370578703704,
    "commits": 4,
    "contributors": 0,
    "owner": "BaptistSec",
    "owner_created": "2021-11-17",
-   "owner_age_days": 1832.7074970396063,
+   "owner_age_days": 1832.7106217965045,
    "owner_repos": 25,
    "open_issues": 0,
    "archived": false,
@@ -238,11 +235,7 @@
    "states_limits": true,
    "no_game_files": true,
    "url": "https://github.com/BaptistSec/ttpf-spec",
-   "default_branch": "main",
-   "listed": true,
-   "not_listed_because": [
-    "fewer than 10 commits"
-   ]
+   "default_branch": "main"
   },
   {
    "repo": "paryzius/ttpf-viewer",
@@ -253,16 +246,17 @@
    "line": "Browses thousands of textures in .ttpf files at once and saves them as PNG or DDS, with cube maps and texture arrays.",
    "works": "Author lists BC1 to BC7, HDR and uncompressed formats, with layout read from the file header.",
    "limits": "Cannot decode textures stored only as BCPack.",
+   "listed": true,
    "license": "MIT",
    "stars": 14,
    "created": "2026-11-20",
    "pushed": "2026-11-21",
-   "pushed_days": 2.7157377803472222,
+   "pushed_days": 2.7188625372453705,
    "commits": 13,
    "contributors": 1,
    "owner": "paryzius",
    "owner_created": "2022-03-23",
-   "owner_age_days": 1707.2262933359027,
+   "owner_age_days": 1707.2294180928009,
    "owner_repos": 2,
    "open_issues": 0,
    "archived": false,
@@ -282,9 +276,7 @@
    "states_limits": false,
    "no_game_files": false,
    "url": "https://github.com/paryzius/ttpf-viewer",
-   "default_branch": "main",
-   "listed": true,
-   "not_listed_because": []
+   "default_branch": "main"
   }
  ],
  "avoid": [

@@ -75,14 +75,6 @@ NO_GAME = re.compile(r"(no game|not contain|does not (include|contain|bundle|hos
 LIMITS = re.compile(r"(not (yet )?playable|not yet|limits|unverified|open questions|in progress|not reached|what it (still )?needs|not supported|untested|pre-1\.0|work in progress|partial)", re.I)
 
 
-def eligible(f, mine):
-    why = []
-    if f["license"] not in OPEN: why.append("no recognised open licence")
-    if f["commits"] < 10: why.append("fewer than 10 commits")
-    if f["owner_age_days"] < 30: why.append("author account under 30 days old")
-    return mine or not why, why
-
-
 def main():
     cfg = json.load(open(os.path.join(HERE, "tools.json")))
     local = os.path.join(HERE, "candidates.local.json")
@@ -122,10 +114,10 @@ def main():
             "artifacts": arts, "states_limits": bool(LIMITS.search(readme)), "no_game_files": bool(NO_GAME.search(readme)),
             "url": r["html_url"], "default_branch": r["default_branch"],
         }
-        f["listed"], f["not_listed_because"] = eligible(f, bool(t.get("mine")))
+        f["listed"] = bool(t.get("listed"))
         rec.update(f)
         out["tools"].append(rec)
-        print(repo, "listed" if f["listed"] else "held: " + ", ".join(f["not_listed_because"]))
+        print(repo, "listed" if f["listed"] else "held")
         time.sleep(0.2)
     for a in cfg.get("avoid", []):
         st, body = api(f"/repos/{a['repo']}")
