@@ -1,0 +1,92 @@
+{
+ "categories": [
+  {
+   "id": "extract",
+   "title": "Pull files out of an install",
+   "ask": "Get models, textures or audio out of the game files you own"
+  },
+  {
+   "id": "textures",
+   "title": "Work with .ttpf texture packs",
+   "ask": "View, swap or read up on .ttpf textures"
+  }
+ ],
+ "tools": [
+  {
+   "repo": "holdmysocks/SixNG",
+   "name": "SixNG",
+   "cat": "extract",
+   "platforms": "Windows, macOS, Linux",
+   "kind": "Command line and desktop app",
+   "line": "Pulls models, textures, audio, text and map data out of your own GTA VI install into glTF, PNG and WAV.",
+   "works": "Author lists textures, models, map placements, collision, audio and text as working; file names are recovered from inside resources because the archive index is encrypted and not read.",
+   "limits": "Some compressed textures use fitted tables, so a few blocks can be slightly off. Materials are partial."
+  },
+  {
+   "repo": "HolyRoses/gta6-explorer",
+   "name": "gta6x",
+   "cat": "extract",
+   "platforms": "Anything with Python 3.10+",
+   "kind": "Command line",
+   "line": "A read-only Python toolkit that lists and exports textures, audio, video and metadata from a GTA VI package, with nothing to install.",
+   "works": "Author lists texture, audio, video, metadata and shader inspection as supported.",
+   "limits": "Model and world export needs the SixNG backend."
+  },
+  {
+   "repo": "Albotterin/AWC_from_RPF9_Extractor",
+   "name": "AWC from RPF9 Extractor",
+   "cat": "extract",
+   "platforms": "See releases",
+   "kind": "Small tool",
+   "line": "Extracts the music streams out of RPF9 files.",
+   "works": "Does one job, audio streams.",
+   "limits": "Audio only."
+  },
+  {
+   "repo": "BaptistSec/ttpf-kit",
+   "name": "ttpf-kit",
+   "cat": "textures",
+   "platforms": "Anything with Python 3",
+   "kind": "Command line",
+   "mine": true,
+   "line": "Reads and rewrites .ttpf containers and makes patches that refuse to apply to the wrong file.",
+   "works": "Parse, replace, diff, apply and verify, with tests.",
+   "limits": "Tested on synthetic files only, so compatibility with real .ttpf files is not established. Compressed (BCPack) textures can only be swapped whole.",
+   "tested": {
+    "synthetic": "20 tests on synthetic files, including malformed input and failed writes.",
+    "windows": "Windows 10 (build 19045), Python 3.10.11, all 20 passed, 24 Nov 2026."
+   }
+  },
+  {
+   "repo": "BaptistSec/ttpf-spec",
+   "name": "ttpf-spec",
+   "cat": "textures",
+   "platforms": "Documentation",
+   "kind": "Spec and reference reader",
+   "mine": true,
+   "line": "A written spec of the .ttpf texture container with a status on every field and a small reference reader.",
+   "works": "Per-field status, open questions listed, reader passes its self-test.",
+   "limits": "Built from community notes and never compared with a genuine file here. Some fields are listed as unresolved.",
+   "tested": {
+    "synthetic": "The reference reader passes a self-test on synthetic files. The Kaitai definition has not been compiled.",
+    "windows": "Not run."
+   }
+  },
+  {
+   "repo": "paryzius/ttpf-viewer",
+   "name": "TTPF Viewer",
+   "cat": "textures",
+   "platforms": "Windows; macOS and Linux from source",
+   "kind": "Desktop app",
+   "line": "Browses thousands of textures in .ttpf files at once and saves them as PNG or DDS, with cube maps and texture arrays.",
+   "works": "Author lists BC1 to BC7, HDR and uncompressed formats, with layout read from the file header.",
+   "limits": "Cannot decode textures stored only as BCPack."
+  }
+ ],
+ "avoid": [
+  {
+   "repo": "lenguyenkhang816792-arch/gta-6-pc-emulator",
+   "why": "No source code, only a README, two images and a workflow file with a random name. It asks you to run a PowerShell install script from a web page. It had 340 stars two days after it was created. We did not run it, and you should not either."
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How we check GTA 6 tools | GTA 6 Tools</title><meta name="description" content="What each evidence row on this site means, who gets listed, and what is left out."><link rel="canonical" href="https://baptistsec.github.io/gta6-tools/method.html">
+<meta property="og:title" content="How we check GTA 6 tools | GTA 6 Tools"><meta property="og:description" content="What each evidence row on this site means, who gets listed, and what is left out."><meta property="og:type" content="website">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="top"><div class="wrap"><a class="brand" href="index.html">GTA 6 <b>Tools</b></a>
+<nav><a href="index.html">Tools</a><a href="method.html">How we check</a><a href="avoid.html">Avoid</a></nav></div></header>
+<main class="wrap"><h1>How we check</h1><p class="sub">Each tool gets a row of evidence, not a score. The four things we separate are easy to mix up, so we keep them apart.</p>
+<h2>Four different things</h2><table><tbody>
+<tr><td><b>Source inspected</b></td><td>We read the README and repository details and hash the release files. Anyone can do this and it says little about whether the tool works.</td></tr>
+<tr><td><b>Synthetic-file testing</b></td><td>Tests that run on files made to look like the real format. They catch bugs. They do not show a tool copes with a genuine file.</td></tr>
+<tr><td><b>Native Windows testing</b></td><td>A run on a real Windows machine. Wine runs and Linux runs do not count.</td></tr>
+<tr><td><b>Genuine retail-file validation</b></td><td>Checking against files from a retail copy. We have not done this for anything here, so every tool shows "No".</td></tr></tbody></table>
+<h2>Who gets listed</h2><div class="box"><p>A tool is listed when it has a recognised open source licence, at least 10 commits, and an author account at least 30 days old. These are days-old projects, so most candidates fail the third rule today and appear later if they last. Tools that are experimental, partial, or whose compatibility we cannot support stay off the list. Our own two tools are listed because they are ours, are marked as experimental, and say what has and has not been tested.</p></div>
+<h2>What we leave out</h2><div class="box"><p>Anything that ships game files, keys or decrypted game content, anything that works around access controls, anything that runs or distributes game executables, and repositories with no source that point you at an installer. We do not link to any of those.</p></div>
+<h2>Release files</h2><div class="box"><p>We download them, hash them, compare the hash with the one GitHub shows, and list what is inside. We never run a downloaded file.</p></div>
+<h2>Run it yourself</h2><p>The crawler is <code>crawler/crawl.py</code> and the page builder is <code>crawler/build.py</code>. Both are plain Python 3.</p></main>
+<footer><div class="wrap"><p>An independent list by William Baptist (<a href="https://github.com/BaptistSec">BaptistSec</a>). Two of the listed tools are mine and are marked. Data crawled 2026-11-24 11:15 UTC. Contact: tidydesksoftware@outlook.com</p>
+<p>Not affiliated with Rockstar Games or Take-Two Interactive. This site does not host or link to game files, executables, keys or ways around access controls.</p></div></footer></body></html>
