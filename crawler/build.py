@@ -22,8 +22,16 @@ def ago(iso):
 def age_days(iso):
     return (datetime.date.today() - datetime.date.fromisoformat(iso)).days
 
+LEVELS = {
+ "real": ("Real-data tested", "good", "Run against genuine game files with results shown."),
+ "sample": ("Sample-data tested", "good", "Tests pass on synthetic or sample files only."),
+ "experimental": ("Experimental", "warn", "Works in places, evidence is thin or limits are open."),
+ "research": ("Research only", "plain", "Notes, specs or findings, not a finished tool."),
+}
+
 def chips(t):
-    out = [(t["license"], "good"), (f"Changed {ago(t['pushed'])}", "plain"), ("Created today" if age_days(t["created"]) == 0 else f"Project is {age_days(t['created'])} days old", "warn")]
+    out = [(LEVELS[t["level"]][0] + (" (author's report)" if t["level"] == "real" else ""), LEVELS[t["level"]][1])] if t.get("level") else []
+    out += [(t["license"], "good"), (f"Changed {ago(t['pushed'])}", "plain"), ("Created today" if age_days(t["created"]) == 0 else f"Project is {age_days(t['created'])} days old", "warn")]
     if t["artifacts"] and t["release_digests"]: out.append(("Release files match GitHub's hashes", "good"))
     elif t["artifacts"]: out.append(("Release files without hashes", "warn"))
     else: out.append(("Source only", "plain"))
@@ -101,7 +109,7 @@ def page(title, desc, body, path, depth=0):
 def stages(t):
     m = t.get("mine"); ts = t.get("tested", {})
     rows = [
-     ("Source inspected", "Yes", "We read the README, " + ("the licence files, " if t.get("license_override") else "") + "and the repository details on " + D["crawled_at"][:10] + ("." if t.get("releases") == 0 else ", and hashed the release files."), "good"),
+     ("Source inspected", "Yes", "We read the README " + ("and licence files, plus " if t.get("license_override") else "and ") + "the repository details on " + D["crawled_at"][:10] + ("." if t.get("releases") == 0 else ", and hashed the release files."), "good"),
      ("Tested on synthetic files", ts.get("synthetic", "Yes, by us.") if (m or ts.get("synthetic")) else "Not by us", "" if (m or ts.get("synthetic")) else "The author may have tests; we have not run them.", "good" if (m or ts.get("synthetic")) else "no"),
      ("Tested on native Windows", ts.get("windows", "Not run.") if (m or ts.get("windows")) else "Not by us", "", "good" if ts.get("windows", "").startswith("Windows") else "no"),
      ("Checked against genuine retail files", "No", "We have not done this for any tool on this site, including our own.", "no")]
@@ -146,7 +154,7 @@ def tool_page(t):
 {mine}
 <h2>What the author says it does</h2><div class="box"><p>{E(t['works'])}</p><p class="muted">{E(t['kind'])}. {E(t['platforms'])}.{'' if t.get('tested') else ' Not something we tested.'}</p></div>
 {lim}
-<h2>What has been checked</h2><table><tbody>{stages(t)}</tbody></table>
+<h2>What has been checked</h2><p>{E(t.get("level_note",""))}</p><table><tbody>{stages(t)}</tbody></table>
 <h2>History</h2><p>{E(hist)}</p>
 {arts}
 <p class="muted">Checked {E(D['crawled_at'])}, from the GitHub API and the project's README.</p>"""
@@ -154,6 +162,7 @@ def tool_page(t):
 
 def method():
     body = f"""<h1>How we check</h1><p class="sub">Each tool gets a row of evidence, not a score. The four things we separate are easy to mix up, so we keep them apart.</p>
+<h2>Four levels</h2><table><tbody>"""+"".join(f'<tr><td><b>{a}</b></td><td>{c}</td></tr>' for a,b,c in LEVELS.values())+f"""</tbody></table><p class="muted">The level says what kind of testing exists. For tools we did not write it follows what the author reports unless the page says we ran something ourselves. Real-data results are never checked by us.</p>
 <h2>Four different things</h2><table><tbody>
 <tr><td><b>Source inspected</b></td><td>We read the README and repository details and hash the release files. Anyone can do this and it says little about whether the tool works.</td></tr>
 <tr><td><b>Synthetic-file testing</b></td><td>Tests that run on files made to look like the real format. They catch bugs. They do not show a tool copes with a genuine file. For tools we did not write, this row is filled only when we ran the author's own tests ourselves, and it names the commit.</td></tr>

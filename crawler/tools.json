@@ -26,7 +26,9 @@
    "line": "Pulls models, textures, audio, text and map data out of your own GTA VI install into glTF, PNG and WAV.",
    "works": "Author lists textures, models, map placements, collision, audio and text as working; file names are recovered from inside resources because the archive index is encrypted and not read.",
    "limits": "Some compressed textures use fitted tables, so a few blocks can be slightly off. Materials are partial.",
-   "listed": true
+   "listed": true,
+   "level": "real",
+   "level_note": "Level: real-data tested, as reported by the author, who describes running it on a genuine install. We have not verified that."
   },
   {
    "repo": "HolyRoses/gta6-explorer",
@@ -37,7 +39,9 @@
    "line": "A read-only Python toolkit that lists and exports textures, audio, video and metadata from a GTA VI package, with nothing to install.",
    "works": "Author lists texture, audio, video, metadata and shader inspection as supported.",
    "limits": "Model and world export needs the SixNG backend.",
-   "listed": true
+   "listed": true,
+   "level": "experimental",
+   "level_note": "Level: experimental. The author lists features as supported but we found no test results to point to."
   },
   {
    "repo": "Albotterin/AWC_from_RPF9_Extractor",
@@ -48,7 +52,9 @@
    "line": "Extracts the music streams out of RPF9 files.",
    "works": "Does one job, audio streams.",
    "limits": "Audio only.",
-   "listed": true
+   "listed": true,
+   "level": "experimental",
+   "level_note": "Level: experimental. One narrow job and no test results found."
   },
   {
    "repo": "BaptistSec/ttpf-kit",
@@ -64,7 +70,9 @@
     "synthetic": "32 tests on synthetic files, including malformed input and failed writes (Linux, Wine and native Windows).",
     "windows": "Windows 10 (build 19045, Python 3.10.11): all 32 tests passed on 24 Nov 2026, synthetic files only."
    },
-   "listed": true
+   "listed": true,
+   "level": "sample",
+   "level_note": "Level: sample-data tested. Synthetic files only, never a genuine .ttpf."
   },
   {
    "repo": "BaptistSec/ttpf-spec",
@@ -80,7 +88,9 @@
     "synthetic": "The reference reader passes a self-test on synthetic files. The Kaitai definition has not been compiled.",
     "windows": "Not run."
    },
-   "listed": true
+   "listed": true,
+   "level": "research",
+   "level_note": "Level: research only. A written spec with a small reference reader, never compared with a genuine file."
   },
   {
    "repo": "paryzius/ttpf-viewer",
@@ -91,7 +101,9 @@
    "line": "Browses thousands of textures in .ttpf files at once and saves them as PNG or DDS, with cube maps and texture arrays.",
    "works": "Author lists BC1 to BC7, HDR and uncompressed formats, with layout read from the file header.",
    "limits": "Cannot decode textures stored only as BCPack.",
-   "listed": true
+   "listed": true,
+   "level": "experimental",
+   "level_note": "Level: experimental. The author lists formats as supported but we found no test results to point to."
   },
   {
    "repo": "Ahmet-Dedeler/rage9-re",
@@ -107,7 +119,9 @@
     "windows": "Not run."
    },
    "listed": true,
-   "license_override": "MIT OR Apache-2.0"
+   "license_override": "MIT OR Apache-2.0",
+   "level": "sample",
+   "level_note": "Level: sample-data tested. We ran the author's synthetic tests. The author reports real-data checks, which we have not verified."
   }
  ],
  "avoid": [
