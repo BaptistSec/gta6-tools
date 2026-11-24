@@ -73,11 +73,24 @@ footer p{margin:4px 0}
 @media(max-width:600px){h1{font-size:27px}nav a{margin-left:12px}.hide-s{display:none}}
 """
 
+def ld(title, desc, path):
+    g = [{"@type":"WebSite","@id":BASE+"#site","name":"GTA 6 Tools","url":BASE,"description":"An independent directory of GTA VI tools: what each does, what it does not do, and what has been checked.","inLanguage":"en"},
+         {"@type":"WebPage","url":BASE+path,"name":title,"description":desc,"isPartOf":{"@id":BASE+"#site"},"dateModified":D["crawled_at"][:10]}]
+    if path == "":
+        g.append({"@type":"ItemList","name":"GTA VI tools","itemListElement":[{"@type":"ListItem","position":i+1,"url":BASE+"tools/"+t["slug"]+".html","name":t["name"]} for i,t in enumerate(tools)]})
+    elif path.startswith("tools/"):
+        g.append({"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tools","item":BASE},{"@type":"ListItem","position":2,"name":title.split(" | ")[0],"item":BASE+path}]})
+    return {"@context":"https://schema.org","@graph":g}
+
 def page(title, desc, body, path, depth=0):
     r = "../" * depth
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{E(title)}</title><meta name="description" content="{E(desc)}"><link rel="canonical" href="{BASE}{path}">
-<meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}"><meta property="og:type" content="website">
+<meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}"><meta property="og:type" content="website"><meta property="og:url" content="{BASE}{path}"><meta property="og:site_name" content="GTA 6 Tools"><meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="{E(title)}"><meta name="twitter:description" content="{E(desc)}">
+<meta name="robots" content="index,follow,max-snippet:-1"><meta name="theme-color" content="#0b0f14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0f14'/%3E%3Ctext x='16' y='23' font-size='18' text-anchor='middle' fill='%23fff' font-family='Arial' font-weight='700'%3E6%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">{json.dumps(ld(title,desc,path))}</script>
 <link rel="stylesheet" href="{r}style.css"></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="{r}index.html">GTA 6 <b>Tools</b></a>
 <nav><a href="{r}index.html">Tools</a><a href="{r}method.html">How we check</a><a href="{r}avoid.html">Avoid</a></nav></div></header>
@@ -166,7 +179,8 @@ for d_ in ("tools", "category"): shutil.rmtree(os.path.join(SITE, d_), ignore_er
 w("style.css", CSS); w("index.html", index()); w("method.html", method()); w("avoid.html", avoid())
 for t in tools: w(f"tools/{t['slug']}.html", tool_page(t))
 urls = ["", "method.html", "avoid.html"] + [f"tools/{t['slug']}.html" for t in tools]
-w("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{BASE}{u}</loc></url>" for u in urls) + "</urlset>")
+w("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{BASE}{u}</loc><lastmod>{D['crawled_at'][:10]}</lastmod></url>" for u in urls) + "</urlset>")
 w("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n")
 w(".nojekyll", "")
+w("404.html", page("Page not found | GTA 6 Tools","This page does not exist.","<h1>Page not found</h1><p><a href=\""+BASE+"\">Back to the tools list</a></p>","404.html").replace('<meta name="robots" content="index,follow,max-snippet:-1">','<meta name="robots" content="noindex">'))
 print("built", len(urls), "pages")
